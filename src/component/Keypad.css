@@ -18,7 +18,7 @@ button {
 } */
 
 .calculator-keypad {
-  height: 400px;
+  height: 420px;
   display: flex;
 }
 
@@ -40,7 +40,7 @@ button {
 
 .calculator-key {
   width: 80px;
-  height: 80px;
+  height: 84px;
   border-top: 1px solid #777;
   border-right: 1px solid #666;
   /* text-align: center;
@@ -86,7 +86,7 @@ button {
 .calculator .operator-keys {
   background: linear-gradient(
     to bottom,
-    rgba(252, 156, 23, 1) 0%,
-    rgba(247, 126, 27, 1) 100%
+    rgb(216, 65, 95) 0%,
+    rgb(209, 44, 77) 100%
   );
 }

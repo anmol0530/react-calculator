@@ -1,8 +1,24 @@
-.display {
+.calculator-display {
   /* height: 35%; */
   color: white;
   background: #1c191c;
-  height: 200px;
-  /* height: 30%; */
-  /* line-height: 130px;   */
+  height: 120px;
+  padding-right: 15px;
+  /* font-size: 5em; */
+  /* position: absolute; */
+  /* display: block; */
+  text-align: right; /* height: 30%; */
+  /* line-height: 130px; */
 }
+
+.input {
+  font-size: 5em;
+}
+
+.answer {
+  font-size: 4em;
+}
+
+/* .calculator-display > div {
+  position: absolute;
+} */

@@ -3,7 +3,6 @@ import "./Keypad.css";
 
 const Keypad = (props) => {
   const { displayValue } = props;
-
   const clearDisplay = displayValue !== "0";
   const clearText = clearDisplay ? "C" : "AC";
 
@@ -15,20 +14,20 @@ const Keypad = (props) => {
             <CalculatorKey
               className="key-clear"
               onPress={() =>
-                clearDisplay ? this.clearDisplay() : this.clearAll()
+                clearDisplay ? props.clearDisplay() : props.clearAll()
               }
             >
               {clearText}
             </CalculatorKey>
             <CalculatorKey
               className="key-sign"
-              onPress={() => this.toggleSign()}
+              onPress={() => props.toggleSign()}
             >
               ±
             </CalculatorKey>
             <CalculatorKey
               className="key-percent"
-              onPress={() => this.inputPercent()}
+              onPress={() => props.inputPercent()}
             >
               %
             </CalculatorKey>
@@ -36,41 +35,71 @@ const Keypad = (props) => {
           <div className="digit-keys">
             <CalculatorKey
               className="key-switch"
-              onPress={() => this.inputDigit(0)}
+              onPress={() => props.inputDigit(0)}
             >
               «
             </CalculatorKey>
-            <CalculatorKey className="key-0" onPress={() => this.inputDigit(0)}>
+            <CalculatorKey
+              className="key-0"
+              onPress={() => props.inputDigit(0)}
+            >
               0
             </CalculatorKey>
-            <CalculatorKey className="key-dot" onPress={() => this.inputDot()}>
+            <CalculatorKey className="key-dot" onPress={() => props.inputDot()}>
               ●
             </CalculatorKey>
-            <CalculatorKey className="key-1" onPress={() => this.inputDigit(1)}>
+            <CalculatorKey
+              className="key-1"
+              onPress={() => props.inputDigit(1)}
+            >
               1
             </CalculatorKey>
-            <CalculatorKey className="key-2" onPress={() => this.inputDigit(2)}>
+            <CalculatorKey
+              className="key-2"
+              onPress={() => props.inputDigit(2)}
+            >
               2
             </CalculatorKey>
-            <CalculatorKey className="key-3" onPress={() => this.inputDigit(3)}>
+            <CalculatorKey
+              className="key-3"
+              onPress={() => props.inputDigit(3)}
+            >
               3
             </CalculatorKey>
-            <CalculatorKey className="key-4" onPress={() => this.inputDigit(4)}>
+            <CalculatorKey
+              className="key-4"
+              onPress={() => props.inputDigit(4)}
+            >
               4
             </CalculatorKey>
-            <CalculatorKey className="key-5" onPress={() => this.inputDigit(5)}>
+            <CalculatorKey
+              className="key-5"
+              onPress={() => props.inputDigit(5)}
+            >
               5
             </CalculatorKey>
-            <CalculatorKey className="key-6" onPress={() => this.inputDigit(6)}>
+            <CalculatorKey
+              className="key-6"
+              onPress={() => props.inputDigit(6)}
+            >
               6
             </CalculatorKey>
-            <CalculatorKey className="key-7" onPress={() => this.inputDigit(7)}>
+            <CalculatorKey
+              className="key-7"
+              onPress={() => props.inputDigit(7)}
+            >
               7
             </CalculatorKey>
-            <CalculatorKey className="key-8" onPress={() => this.inputDigit(8)}>
+            <CalculatorKey
+              className="key-8"
+              onPress={() => props.inputDigit(8)}
+            >
               8
             </CalculatorKey>
-            <CalculatorKey className="key-9" onPress={() => this.inputDigit(9)}>
+            <CalculatorKey
+              className="key-9"
+              onPress={() => props.inputDigit(9)}
+            >
               9
             </CalculatorKey>
           </div>
@@ -78,31 +107,31 @@ const Keypad = (props) => {
         <div className="operator-keys">
           <CalculatorKey
             className="key-divide"
-            onPress={() => this.performOperation("/")}
+            onPress={() => props.performOperation("/")}
           >
             ÷
           </CalculatorKey>
           <CalculatorKey
             className="key-multiply"
-            onPress={() => this.performOperation("*")}
+            onPress={() => props.performOperation("*")}
           >
             ×
           </CalculatorKey>
           <CalculatorKey
             className="key-subtract"
-            onPress={() => this.performOperation("-")}
+            onPress={() => props.performOperation("-")}
           >
             −
           </CalculatorKey>
           <CalculatorKey
             className="key-add"
-            onPress={() => this.performOperation("+")}
+            onPress={() => props.performOperation("+")}
           >
             +
           </CalculatorKey>
           <CalculatorKey
             className="key-equals"
-            onPress={() => this.performOperation("=")}
+            onPress={() => props.performOperation("=")}
           >
             =
           </CalculatorKey>
