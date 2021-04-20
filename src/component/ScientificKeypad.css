@@ -1,4 +1,4 @@
-button {
+.scientific-keypad button {
   display: block;
   background: none;
   border: none;
@@ -22,9 +22,9 @@ button {
   display: flex;
 }
 
-.calculator .input-keys {
+/* .calculator .input-keys {
   width: 240px;
-}
+} */
 
 .calculator .function-keys {
   display: flex;
@@ -38,9 +38,9 @@ button {
   flex-wrap: wrap-reverse;
 }
 
-.calculator-key {
-  width: 80px;
-  height: 84px;
+.scientific-keypad .calculator-key {
+  width: 64px;
+  height: 60px;
   border-top: 1px solid #444;
   border-right: 1px solid #666;
   /* text-align: center;
@@ -70,10 +70,21 @@ button {
   font-size: 0.75em;
 }
 
-.calculator .operator-keys .calculator-key {
+.calculator .scientific-keypad .operator-keys .calculator-key {
   color: white;
-  border-right: 0;
-  font-size: 3em;
+  /* border-right: 0; */
+  border-right: 1px solid #444;
+  font-size: 2em;
+  background: linear-gradient(
+    to bottom,
+    rgb(216, 65, 95) 0%,
+    rgb(214, 59, 90) 100%
+  );
+}
+
+.calculator .input-keys .operator-keys {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .calculator .function-keys {

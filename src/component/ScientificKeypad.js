@@ -1,16 +1,54 @@
 import PointTarget from "react-point";
 import { Link } from "react-router-dom";
-import "./Keypad.css";
+import "./ScientificKeypad.css";
 
-const Keypad = (props) => {
+const ScientificKeypad = (props) => {
   const { displayValue } = props;
   const clearDisplay = displayValue !== "0";
   const clearText = clearDisplay ? "C" : "AC";
 
   return (
-    <div className="keypad">
+    <div className="scientific-keypad">
       <div className="calculator-keypad">
         <div className="input-keys">
+          <div className="operator-keys">
+            <CalculatorKey
+              className="key-deg"
+              onPress={() => props.performOperation("deg")}
+            >
+              deg
+            </CalculatorKey>
+            <CalculatorKey
+              className="key-sin"
+              onPress={() => props.performOperation("sin")}
+            >
+              sin
+            </CalculatorKey>
+            <CalculatorKey
+              className="key-cos"
+              onPress={() => props.performOperation("cos")}
+            >
+              cos
+            </CalculatorKey>
+            <CalculatorKey
+              className="key-lg"
+              onPress={() => props.performOperation("lg")}
+            >
+              lg
+            </CalculatorKey>
+            <CalculatorKey
+              className="key-ln"
+              onPress={() => props.performOperation("ln")}
+            >
+              ln
+            </CalculatorKey>
+            <CalculatorKey
+              className="key-opening"
+              onPress={() => props.performOperation("(")}
+            >
+              (
+            </CalculatorKey>
+          </div>
           <div className="function-keys">
             <CalculatorKey
               className="key-clear"
@@ -35,8 +73,8 @@ const Keypad = (props) => {
           </div>
           <div className="digit-keys">
             <CalculatorKey className="key-switch">
-              <Link to="/scientific" style={{ textDecoration: "none" }}>
-                «
+              <Link to="/" style={{ textDecoration: "none" }}>
+                »
               </Link>
             </CalculatorKey>
             <CalculatorKey
@@ -106,6 +144,18 @@ const Keypad = (props) => {
         </div>
         <div className="operator-keys">
           <CalculatorKey
+            className="key-tan"
+            onPress={() => props.performOperation("tan")}
+          >
+            tan
+          </CalculatorKey>
+          <CalculatorKey
+            className="key-closing"
+            onPress={() => props.performOperation(")")}
+          >
+            )
+          </CalculatorKey>
+          <CalculatorKey
             className="key-divide"
             onPress={() => props.performOperation("/")}
           >
@@ -136,6 +186,50 @@ const Keypad = (props) => {
             =
           </CalculatorKey>
         </div>
+        <div className="operator-keys">
+          <CalculatorKey
+            className="key-second"
+            onPress={() => props.performOperation("2nd")}
+          >
+            2nd
+          </CalculatorKey>
+          <CalculatorKey
+            className="key-power"
+            onPress={() => props.performOperation("**")}
+          >
+            xʸ
+          </CalculatorKey>
+          <CalculatorKey
+            className="key-root"
+            onPress={() => props.performOperation("√")}
+          >
+            √x
+          </CalculatorKey>
+          <CalculatorKey
+            className="key-factorial"
+            onPress={() => props.performOperation("!")}
+          >
+            x!
+          </CalculatorKey>
+          <CalculatorKey
+            className="key-reciprocal"
+            onPress={() => props.performOperation("1/x")}
+          >
+            1/x
+          </CalculatorKey>
+          <CalculatorKey
+            className="key-pie"
+            onPress={() => props.performOperation("π")}
+          >
+            π
+          </CalculatorKey>
+          <CalculatorKey
+            className="key-exponential"
+            onPress={() => props.performOperation("e")}
+          >
+            e
+          </CalculatorKey>
+        </div>
       </div>
     </div>
   );
@@ -150,4 +244,4 @@ const CalculatorKey = (props) => {
   );
 };
 
-export default Keypad;
+export default ScientificKeypad;

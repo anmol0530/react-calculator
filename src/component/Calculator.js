@@ -1,6 +1,8 @@
 import { Component } from "react";
 import Display from "./Display";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Keypad from "./Keypad";
+import ScientificKeypad from "./ScientificKeypad";
 
 export default class Calculator extends Component {
   state = {
@@ -162,16 +164,39 @@ export default class Calculator extends Component {
     return (
       <div className="calculator">
         <Display value={displayValue} />
-        <Keypad
-          displayValue={displayValue}
-          clearDisplay={this.clearDisplay}
-          toggleSign={this.toggleSign}
-          clearAll={this.clearAll}
-          inputPercent={this.inputPercent}
-          inputDigit={this.inputDigit}
-          inputDot={this.inputDot}
-          performOperation={this.performOperation}
-        />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            component={() => (
+              <Keypad
+                displayValue={displayValue}
+                clearDisplay={this.clearDisplay}
+                toggleSign={this.toggleSign}
+                clearAll={this.clearAll}
+                inputPercent={this.inputPercent}
+                inputDigit={this.inputDigit}
+                inputDot={this.inputDot}
+                performOperation={this.performOperation}
+              />
+            )}
+          />
+          <Route
+            path="/scientific"
+            component={() => (
+              <ScientificKeypad
+                displayValue={displayValue}
+                clearDisplay={this.clearDisplay}
+                toggleSign={this.toggleSign}
+                clearAll={this.clearAll}
+                inputPercent={this.inputPercent}
+                inputDigit={this.inputDigit}
+                inputDot={this.inputDot}
+                performOperation={this.performOperation}
+              />
+            )}
+          />
+        </Switch>
       </div>
     );
   }
