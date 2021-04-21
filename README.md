@@ -9,7 +9,7 @@ Calculator application built using React JS javascript library, also includes sc
 - Toggle between Radians and degrees.
 - Tap "±" button to toggle sign.
 - Value of π and e can be seen by clicking on the buttons and then clicking on the "=" button.
-- π and e can be used in calculations by first clicking on the button and then clicking on another operation button ("+,-,/,\*,√,ln" etc).
+- π and e can be used in calculations by first clicking on the button and then clicking on another operation button ("+, -, /, \*, √, ln" etc).
 
 ### Use cases
 
