@@ -1,14 +1,20 @@
 .calculator-display {
-  /* height: 35%; */
   color: white;
   background: #1c191c;
-  height: 120px;
-  padding: 0px 15px;
-  /* font-size: 5em; */
-  /* position: absolute; */
-  /* display: block; */
-  text-align: right; /* height: 30%; */
-  /* line-height: 130px; */
+  font-size: 6em;
+  line-height: 115px;
+  flex: 1;
+}
+
+.auto-scaling-text {
+  display: inline-block;
+}
+
+.calculator-display .auto-scaling-text {
+  padding: 0 30px;
+  position: absolute;
+  right: 0;
+  transform-origin: right;
 }
 
 .input {

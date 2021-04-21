@@ -1,29 +1,66 @@
+import React from "react";
 import "./Display.css";
 
-// const Display = () => {
-//   return <div className="display">Display</div>;
-// };
+class AutoScalingText extends React.Component {
+  state = {
+    scale: 1,
+  };
 
-const Display = (props) => {
-  const { value, ...propss } = props;
+  componentDidUpdate() {
+    const { scale } = this.state;
 
-  const language = /*navigator.language || */ "en-IN";
-  let formattedValue = parseFloat(value).toLocaleString(language, {
-    useGrouping: true,
-    maximumFractionDigits: 6,
-  });
+    const node = this.node;
+    const parentNode = node.parentNode;
 
-  // Add back missing .0 in e.g. 12.0
-  const match = value.match(/\.\d*?(0*)$/);
+    const availableWidth = parentNode.offsetWidth;
+    const actualWidth = node.offsetWidth;
+    const actualScale = availableWidth / actualWidth;
 
-  if (match) formattedValue += /[1-9]/.test(match[0]) ? match[1] : match[0];
+    if (scale === actualScale) return;
 
-  return (
-    <div {...propss} className="calculator-display">
-      {/* <div className="calculator-display"> */}
-      <div className="input">{formattedValue}</div>
-    </div>
-  );
-};
+    if (actualScale < 1) {
+      this.setState({ scale: actualScale });
+    } else if (scale < 1) {
+      this.setState({ scale: 1 });
+    }
+  }
+
+  render() {
+    const { scale } = this.state;
+
+    return (
+      <div
+        className="auto-scaling-text"
+        style={{ transform: `scale(${scale},${scale})` }}
+        ref={(node) => (this.node = node)}
+      >
+        {this.props.children}
+      </div>
+    );
+  }
+}
+
+class Display extends React.Component {
+  render() {
+    const { value, ...props } = this.props;
+
+    const language = "en-IN" || navigator.language;
+    let formattedValue = parseFloat(value).toLocaleString(language, {
+      useGrouping: true,
+      maximumFractionDigits: 6,
+    });
+
+    // Add back missing .0 in e.g. 12.0
+    const match = value.match(/\.\d*?(0*)$/);
+
+    if (match) formattedValue += /[1-9]/.test(match[0]) ? match[1] : match[0];
+
+    return (
+      <div {...props} className="calculator-display">
+        <AutoScalingText>{formattedValue}</AutoScalingText>
+      </div>
+    );
+  }
+}
 
 export default Display;

@@ -1,5 +1,4 @@
 .App {
-  /* text-align: center; */
   height: 100vh;
   display: flex;
   align-items: center;
@@ -12,7 +11,7 @@
   position: relative;
 }
 
-.app .calculator {
+.wrapper .calculator {
   box-shadow: 0px 0px 20px 0px #aaa;
 }
 
@@ -20,4 +19,6 @@
   height: 100%;
   width: 100%;
   background: black;
+  display: flex;
+  flex-direction: column;
 }

@@ -12,8 +12,6 @@ const ScientificKeypad = (props) => {
   const cos = inverse ? "cos⁻¹" : "cos";
   const tan = inverse ? "tan⁻¹" : "tan";
 
-  // toggleInverse = () => (inverse = !inverse);
-
   return (
     <div className="scientific-keypad">
       <div className="calculator-keypad">
@@ -229,7 +227,7 @@ const ScientificKeypad = (props) => {
           </CalculatorKey>
           <CalculatorKey
             className="key-pie"
-            onPress={() => props.performOperation("π")}
+            onPress={() => props.handlePieAndExp("π")}
           >
             π
           </CalculatorKey>

@@ -22,10 +22,6 @@ button:active {
   display: flex;
 }
 
-/* .calculator .input-keys {
-  width: 240px;
-} */
-
 .calculator .function-keys {
   display: flex;
 }
@@ -43,27 +39,15 @@ button:active {
   height: 60px;
   border-top: 1px solid #444;
   border-right: 1px solid #666;
-  /* text-align: center;
-  line-height: 80px; */
 }
 
 .calculator .function-keys .calculator-key {
   font-size: 2em;
 }
 
-/* .calculator .operator-keys .key-multiply {
-  line-height: 50px;
-} */
-
 .calculator .digit-keys .calculator-key {
   font-size: 2.25em;
 }
-
-/* .calculator .digit-keys .key-0 {
-  width: 160px;
-  text-align: left;
-  padding-left: 32px;
-} */
 
 .calculator .digit-keys .key-dot {
   padding-top: 1em;
@@ -72,7 +56,6 @@ button:active {
 
 .calculator .scientific-keypad .operator-keys .calculator-key {
   color: white;
-  /* border-right: 0; */
   border-right: 1px solid #444;
   font-size: 1.4em;
   background: linear-gradient(
