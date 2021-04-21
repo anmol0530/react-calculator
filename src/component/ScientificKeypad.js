@@ -1,11 +1,18 @@
+import { useState } from "react";
 import PointTarget from "react-point";
 import { Link } from "react-router-dom";
 import "./ScientificKeypad.css";
 
 const ScientificKeypad = (props) => {
-  const { displayValue } = props;
+  const [inverse, toggleInverse] = useState(false);
+  const { displayValue, deg } = props;
   const clearDisplay = displayValue !== "0";
   const clearText = clearDisplay ? "C" : "AC";
+  const sin = inverse ? "sin⁻¹" : "sin";
+  const cos = inverse ? "cos⁻¹" : "cos";
+  const tan = inverse ? "tan⁻¹" : "tan";
+
+  // toggleInverse = () => (inverse = !inverse);
 
   return (
     <div className="scientific-keypad">
@@ -14,39 +21,39 @@ const ScientificKeypad = (props) => {
           <div className="operator-keys">
             <CalculatorKey
               className="key-deg"
-              onPress={() => props.performOperation("deg")}
+              onPress={() => props.toggleDeg()}
             >
-              deg
+              {deg ? "deg" : "rad"}
             </CalculatorKey>
             <CalculatorKey
               className="key-sin"
-              onPress={() => props.performOperation("sin")}
+              onPress={() => props.performOperation(sin)}
             >
-              sin
+              {inverse ? "sin⁻¹x" : "sin x"}
             </CalculatorKey>
             <CalculatorKey
               className="key-cos"
-              onPress={() => props.performOperation("cos")}
+              onPress={() => props.performOperation(cos)}
             >
-              cos
+              {inverse ? "cos⁻¹x" : "cos x"}
             </CalculatorKey>
             <CalculatorKey
               className="key-lg"
               onPress={() => props.performOperation("lg")}
             >
-              lg
+              lg(x)
             </CalculatorKey>
             <CalculatorKey
               className="key-ln"
               onPress={() => props.performOperation("ln")}
             >
-              ln
+              ln(x)
             </CalculatorKey>
             <CalculatorKey
-              className="key-opening"
-              onPress={() => props.performOperation("(")}
+              className="key-ten-power"
+              onPress={() => props.performOperation("10ˣ")}
             >
-              (
+              10ˣ
             </CalculatorKey>
           </div>
           <div className="function-keys">
@@ -73,7 +80,10 @@ const ScientificKeypad = (props) => {
           </div>
           <div className="digit-keys">
             <CalculatorKey className="key-switch">
-              <Link to="/" style={{ textDecoration: "none" }}>
+              <Link
+                to="/"
+                style={{ textDecoration: "none", padding: "0px 20px" }}
+              >
                 »
               </Link>
             </CalculatorKey>
@@ -145,15 +155,15 @@ const ScientificKeypad = (props) => {
         <div className="operator-keys">
           <CalculatorKey
             className="key-tan"
-            onPress={() => props.performOperation("tan")}
+            onPress={() => props.performOperation(tan)}
           >
-            tan
+            {inverse ? "tan⁻¹x" : "tan x"}
           </CalculatorKey>
           <CalculatorKey
-            className="key-closing"
-            onPress={() => props.performOperation(")")}
+            className="key-exp-power"
+            onPress={() => props.performOperation("eˣ")}
           >
-            )
+            eˣ
           </CalculatorKey>
           <CalculatorKey
             className="key-divide"
@@ -189,9 +199,9 @@ const ScientificKeypad = (props) => {
         <div className="operator-keys">
           <CalculatorKey
             className="key-second"
-            onPress={() => props.performOperation("2nd")}
+            onPress={() => toggleInverse(!inverse)}
           >
-            2nd
+            Inv
           </CalculatorKey>
           <CalculatorKey
             className="key-power"

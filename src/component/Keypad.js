@@ -35,7 +35,10 @@ const Keypad = (props) => {
           </div>
           <div className="digit-keys">
             <CalculatorKey className="key-switch">
-              <Link to="/scientific" style={{ textDecoration: "none" }}>
+              <Link
+                to="/scientific"
+                style={{ textDecoration: "none", padding: "10px 20px" }}
+              >
                 «
               </Link>
             </CalculatorKey>
