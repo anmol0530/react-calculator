@@ -21,11 +21,17 @@ Calculator application built using React JS javascript library, also includes sc
 - Steps to compute ln(e) : "e" => "ln(x)" => "="
 - Steps to compute ln(e³) : "eˣ" => 3 => "=" => "ln(x)" => "="
 
-#### Available Scripts
+#### Installation
 
-In the project directory, you can run:
+`git clone`
+`cd react-calculator`
+`npm install`
 
-##### `npm start`
+##### Available Scripts
+
+In the project directory, run:
+
+###### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
