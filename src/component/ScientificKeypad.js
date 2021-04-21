@@ -227,7 +227,7 @@ const ScientificKeypad = (props) => {
           </CalculatorKey>
           <CalculatorKey
             className="key-pie"
-            onPress={() => props.handlePieAndExp("π")}
+            onPress={() => props.performOperation("π")}
           >
             π
           </CalculatorKey>
