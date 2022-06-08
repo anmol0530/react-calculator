@@ -13,7 +13,7 @@ Calculator application built using React JS javascript library, also includes sc
 
 ### Use cases
 
-- Steps to compute (π / 5) : π => / => 3 => "=".
+- Steps to compute (π / 3) : π => / => 3 => "=".
 - Steps to compute (5⁴) : 5 => "xʸ" => 4 => "="
 - Steps to compute reciprocal of 5 : "1/x" => 5 => "="
 - Steps to compute 5! : "x!" => 5 => "="
