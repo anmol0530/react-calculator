@@ -1,12 +1,11 @@
 import { useState } from "react";
 import PointTarget from "react-point";
-import { Link } from "react-router-dom";
 import Tooltip from "./Tooltip";
 import "./ScientificKeypad.css";
 
 const ScientificKeypad = (props) => {
   const [inverse, toggleInverse] = useState(false);
-  const { displayValue, deg } = props;
+  const { displayValue, deg, toggleCalculatorMode } = props;
   const clearDisplay = displayValue !== "0";
   const clearText = clearDisplay ? "C" : "AC";
   const sin = inverse ? "sin⁻¹" : "sin";
@@ -18,12 +17,14 @@ const ScientificKeypad = (props) => {
       <div className="calculator-keypad">
         <div className="input-keys">
           <div className="operator-keys">
-            <CalculatorKey
-              className="key-deg"
-              onPress={() => props.toggleDeg()}
-            >
-              {deg ? "deg" : "rad"}
-            </CalculatorKey>
+            <Tooltip text={deg ? "Switch to radians" : "Switch to degrees"}>
+              <CalculatorKey
+                className="key-deg"
+                onPress={() => props.toggleDeg()}
+              >
+                {deg ? "deg" : "rad"}
+              </CalculatorKey>
+            </Tooltip>
             <Tooltip text={inverse ? "Inverse sine (arcsine)" : "Sine function"}>
               <CalculatorKey
                 className="key-sin"
@@ -56,12 +57,14 @@ const ScientificKeypad = (props) => {
                 ln(x)
               </CalculatorKey>
             </Tooltip>
-            <CalculatorKey
-              className="key-ten-power"
-              onPress={() => props.performOperation("10ˣ")}
-            >
-              10ˣ
-            </CalculatorKey>
+            <Tooltip text="10 to the power of x">
+              <CalculatorKey
+                className="key-ten-power"
+                onPress={() => props.performOperation("10ˣ")}
+              >
+                10ˣ
+              </CalculatorKey>
+            </Tooltip>
           </div>
           <div className="function-keys">
             <CalculatorKey
@@ -86,14 +89,14 @@ const ScientificKeypad = (props) => {
             </CalculatorKey>
           </div>
           <div className="digit-keys">
-            <CalculatorKey className="key-switch">
-              <Link
-                to="/"
-                style={{ textDecoration: "none", padding: "0px 20px" }}
+            <Tooltip text="Switch to basic calculator (Press S)">
+              <CalculatorKey 
+                className="key-switch"
+                onPress={toggleCalculatorMode}
               >
                 »
-              </Link>
-            </CalculatorKey>
+              </CalculatorKey>
+            </Tooltip>
             <CalculatorKey
               className="key-0"
               onPress={() => props.inputDigit(0)}
@@ -160,12 +163,14 @@ const ScientificKeypad = (props) => {
           </div>
         </div>
         <div className="operator-keys">
-          <CalculatorKey
-            className="key-tan"
-            onPress={() => props.performOperation(tan)}
-          >
-            {inverse ? "tan⁻¹x" : "tan x"}
-          </CalculatorKey>
+            <Tooltip text={inverse ? "Inverse tangent (arctangent)" : "Tangent function"}>
+              <CalculatorKey
+                className="key-tan"
+                onPress={() => props.performOperation(tan)}
+              >
+                {inverse ? "tan⁻¹x" : "tan x"}
+              </CalculatorKey>
+            </Tooltip>
           <CalculatorKey
             className="key-exp-power"
             onPress={() => props.performOperation("eˣ")}

@@ -1,0 +1,311 @@
+/* Responsive Design for React Calculator */
+
+/* Mobile First Approach */
+@media (max-width: 480px) {
+  .wrapper {
+    width: 100vw;
+    height: 100vh;
+    padding: 10px;
+  }
+
+  .calculator {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    border-radius: 0;
+  }
+
+  .calculator-display {
+    font-size: 4em;
+    line-height: 80px;
+    min-height: 80px;
+  }
+
+  .calculator-keypad {
+    height: calc(100vh - 120px);
+  }
+
+  .calculator-key {
+    width: calc(25% - 2px);
+    height: calc((100vh - 200px) / 5 - 2px);
+    font-size: 1.5em;
+    margin: 1px;
+  }
+
+  .calculator .digit-keys .calculator-key {
+    font-size: 1.8em;
+  }
+
+  .calculator .operator-keys .calculator-key {
+    font-size: 2em;
+  }
+
+  .history-panel {
+    right: -100vw;
+    width: 100vw;
+  }
+
+  .floating-history-btn,
+  .keyboard-shortcuts-btn,
+  .theme-toggle-btn {
+    position: fixed;
+    z-index: 1001;
+  }
+
+  .floating-history-btn {
+    top: 15px;
+    right: 15px;
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+
+  .theme-toggle-btn {
+    top: 65px;
+    right: 15px;
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+
+  .keyboard-shortcuts-btn {
+    bottom: 15px;
+    right: 15px;
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+}
+
+/* Tablet Portrait */
+@media (min-width: 481px) and (max-width: 768px) {
+  .wrapper {
+    width: 400px;
+    height: 600px;
+  }
+
+  .calculator-display {
+    font-size: 5em;
+    line-height: 100px;
+  }
+
+  .calculator-keypad {
+    height: 500px;
+  }
+
+  .calculator-key {
+    width: 90px;
+    height: 90px;
+    font-size: 1.8em;
+  }
+
+  .calculator .digit-keys .calculator-key {
+    font-size: 2em;
+  }
+
+  .calculator .operator-keys .calculator-key {
+    font-size: 2.5em;
+  }
+
+  .history-panel {
+    right: -350px;
+    width: 320px;
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .App {
+    padding: 20px;
+  }
+
+  .wrapper {
+    width: 420px;
+    height: 620px;
+  }
+
+  .calculator-display {
+    font-size: 5.5em;
+    line-height: 110px;
+  }
+
+  .calculator-keypad {
+    height: 500px;
+  }
+
+  .history-panel {
+    right: -380px;
+    width: 350px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  .App {
+    padding: 40px;
+  }
+
+  .wrapper {
+    width: 320px;
+    height: 540px;
+  }
+
+  .history-panel {
+    right: -280px;
+    width: 260px;
+  }
+
+  /* Add hover effects only on desktop */
+  .calculator-key:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .floating-history-btn:hover,
+  .keyboard-shortcuts-btn:hover,
+  .theme-toggle-btn:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+  .wrapper {
+    width: 380px;
+    height: 620px;
+  }
+
+  .calculator-display {
+    font-size: 6.5em;
+    line-height: 130px;
+  }
+
+  .calculator-keypad {
+    height: 480px;
+  }
+
+  .calculator-key {
+    width: 95px;
+    height: 95px;
+  }
+
+  .history-panel {
+    right: -320px;
+    width: 300px;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+  .wrapper {
+    width: 90vw;
+    height: 90vh;
+    max-width: 600px;
+    max-height: 400px;
+  }
+
+  .calculator-display {
+    font-size: 3em;
+    line-height: 60px;
+    min-height: 60px;
+  }
+
+  .calculator-keypad {
+    height: calc(90vh - 80px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .input-keys {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+  }
+
+  .operator-keys {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .calculator-key {
+    font-size: 1.2em;
+    height: 50px;
+  }
+
+  .floating-history-btn,
+  .theme-toggle-btn,
+  .keyboard-shortcuts-btn {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .calculator-key {
+    border-width: 0.5px;
+  }
+
+  .history-panel {
+    border-left-width: 0.5px;
+  }
+}
+
+/* Accessibility - Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .calculator-key:hover {
+    transform: none;
+  }
+
+  .floating-history-btn:hover,
+  .keyboard-shortcuts-btn:hover,
+  .theme-toggle-btn:hover {
+    transform: none;
+  }
+}
+
+/* Dark mode preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg-primary: #000000;
+    --bg-secondary: #1a1a1a;
+    --text-primary: #ffffff;
+  }
+}
+
+/* Light mode preference */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --text-primary: #000000;
+  }
+}
+
+/* Print styles */
+@media print {
+  .floating-history-btn,
+  .keyboard-shortcuts-btn,
+  .theme-toggle-btn,
+  .history-panel {
+    display: none;
+  }
+
+  .calculator {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+
+  .calculator-display {
+    background: white;
+    color: black;
+    border: 1px solid #000;
+  }
+}

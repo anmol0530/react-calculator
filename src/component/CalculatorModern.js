@@ -1,17 +1,12 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Display from "./Display";
 import History from "./History";
 import FloatingHistoryButton from "./FloatingHistoryButton";
 import KeyboardShortcuts from "./KeyboardShortcuts";
-import ThemeToggle from "./ThemeToggle";
-import { useTheme } from "./ThemeProvider";
 import Keypad from "./Keypad";
 import ScientificKeypad from "./ScientificKeypad";
 
 const Calculator = () => {
-  // Theme context
-  const { toggleTheme } = useTheme();
-
   // State management with hooks
   const [state, setState] = useState({
     value: null,
@@ -180,7 +175,7 @@ const Calculator = () => {
     return f;
   }, []);
 
-  const calculatorOperations = useMemo(() => ({
+  const calculatorOperations = {
     "/": (prevValue, nextValue) => prevValue / nextValue,
     "*": (prevValue, nextValue) => prevValue * nextValue,
     "+": (prevValue, nextValue) => prevValue + nextValue,
@@ -220,9 +215,9 @@ const Calculator = () => {
     π: () => Math.PI,
     e: () => Math.E,
     "=": (prevValue, nextValue) => nextValue,
-  }), [deg, factorial]);
+  };
 
-  const getOperatorSymbol = useMemo(() => {
+  const getOperatorSymbol = useCallback((op) => {
     const symbols = {
       "+": " + ",
       "-": " - ",
@@ -246,7 +241,7 @@ const Calculator = () => {
       "π": "π",
       "e": "e"
     };
-    return (op) => symbols[op] || ` ${op} `;
+    return symbols[op] || ` ${op} `;
   }, []);
 
   const performOperation = useCallback((nextOperator) => {
@@ -345,14 +340,11 @@ const Calculator = () => {
     } else if (key === "s" || key === "S") {
       event.preventDefault();
       toggleCalculatorMode();
-    } else if (key === "t" || key === "T") {
-      event.preventDefault();
-      toggleTheme();
     }
   }, [
     calculatorOperations, inputDigit, performOperation, inputDot, inputPercent,
     clearLastChar, displayValue, clearDisplay, clearAll, toggleHistory,
-    toggleCalculatorMode, toggleTheme
+    toggleCalculatorMode
   ]);
 
   // Effects
@@ -410,7 +402,6 @@ const Calculator = () => {
         showHistory={showHistory}
       />
       <KeyboardShortcuts />
-      <ThemeToggle />
     </div>
   );
 };

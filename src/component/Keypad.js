@@ -1,9 +1,9 @@
 import PointTarget from "react-point";
-import { Link } from "react-router-dom";
+import Tooltip from "./Tooltip";
 import "./Keypad.css";
 
 const Keypad = (props) => {
-  const { displayValue } = props;
+  const { displayValue, toggleCalculatorMode } = props;
   const clearDisplay = displayValue !== "0";
   const clearText = clearDisplay ? "C" : "AC";
 
@@ -12,45 +12,55 @@ const Keypad = (props) => {
       <div className="calculator-keypad">
         <div className="input-keys">
           <div className="function-keys">
-            <CalculatorKey
-              className="key-clear"
-              onPress={() =>
-                clearDisplay ? props.clearDisplay() : props.clearAll()
-              }
-            >
-              {clearText}
-            </CalculatorKey>
-            <CalculatorKey
-              className="key-sign"
-              onPress={() => props.toggleSign()}
-            >
-              ±
-            </CalculatorKey>
-            <CalculatorKey
-              className="key-percent"
-              onPress={() => props.inputPercent()}
-            >
-              %
-            </CalculatorKey>
+            <Tooltip text={clearDisplay ? "Clear display" : "Clear all"}>
+              <CalculatorKey
+                className="key-clear"
+                onPress={() =>
+                  clearDisplay ? props.clearDisplay() : props.clearAll()
+                }
+              >
+                {clearText}
+              </CalculatorKey>
+            </Tooltip>
+            <Tooltip text="Toggle positive/negative">
+              <CalculatorKey
+                className="key-sign"
+                onPress={() => props.toggleSign()}
+              >
+                ±
+              </CalculatorKey>
+            </Tooltip>
+            <Tooltip text="Convert to percentage">
+              <CalculatorKey
+                className="key-percent"
+                onPress={() => props.inputPercent()}
+              >
+                %
+              </CalculatorKey>
+            </Tooltip>
           </div>
           <div className="digit-keys">
-            <CalculatorKey className="key-switch">
-              <Link
-                to="/scientific"
-                style={{ textDecoration: "none", padding: "10px 20px" }}
+            <Tooltip text="Switch to scientific calculator (Press S)">
+              <CalculatorKey 
+                className="key-switch"
+                onPress={toggleCalculatorMode}
               >
                 «
-              </Link>
-            </CalculatorKey>
-            <CalculatorKey
-              className="key-0"
-              onPress={() => props.inputDigit(0)}
-            >
-              0
-            </CalculatorKey>
-            <CalculatorKey className="key-dot" onPress={() => props.inputDot()}>
-              ●
-            </CalculatorKey>
+              </CalculatorKey>
+            </Tooltip>
+            <Tooltip text="Enter zero">
+              <CalculatorKey
+                className="key-0"
+                onPress={() => props.inputDigit(0)}
+              >
+                0
+              </CalculatorKey>
+            </Tooltip>
+            <Tooltip text="Decimal point">
+              <CalculatorKey className="key-dot" onPress={() => props.inputDot()}>
+                ●
+              </CalculatorKey>
+            </Tooltip>
             <CalculatorKey
               className="key-1"
               onPress={() => props.inputDigit(1)}
@@ -108,36 +118,46 @@ const Keypad = (props) => {
           </div>
         </div>
         <div className="operator-keys">
-          <CalculatorKey
-            className="key-divide"
-            onPress={() => props.performOperation("/")}
-          >
-            ÷
-          </CalculatorKey>
-          <CalculatorKey
-            className="key-multiply"
-            onPress={() => props.performOperation("*")}
-          >
-            ×
-          </CalculatorKey>
-          <CalculatorKey
-            className="key-subtract"
-            onPress={() => props.performOperation("-")}
-          >
-            −
-          </CalculatorKey>
-          <CalculatorKey
-            className="key-add"
-            onPress={() => props.performOperation("+")}
-          >
-            +
-          </CalculatorKey>
-          <CalculatorKey
-            className="key-equals"
-            onPress={() => props.performOperation("=")}
-          >
-            =
-          </CalculatorKey>
+          <Tooltip text="Division (/)">
+            <CalculatorKey
+              className="key-divide"
+              onPress={() => props.performOperation("/")}
+            >
+              ÷
+            </CalculatorKey>
+          </Tooltip>
+          <Tooltip text="Multiplication (*)">
+            <CalculatorKey
+              className="key-multiply"
+              onPress={() => props.performOperation("*")}
+            >
+              ×
+            </CalculatorKey>
+          </Tooltip>
+          <Tooltip text="Subtraction (-)">
+            <CalculatorKey
+              className="key-subtract"
+              onPress={() => props.performOperation("-")}
+            >
+              −
+            </CalculatorKey>
+          </Tooltip>
+          <Tooltip text="Addition (+)">
+            <CalculatorKey
+              className="key-add"
+              onPress={() => props.performOperation("+")}
+            >
+              +
+            </CalculatorKey>
+          </Tooltip>
+          <Tooltip text="Calculate result (Enter)">
+            <CalculatorKey
+              className="key-equals"
+              onPress={() => props.performOperation("=")}
+            >
+              =
+            </CalculatorKey>
+          </Tooltip>
         </div>
       </div>
     </div>

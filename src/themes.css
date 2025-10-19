@@ -1,0 +1,177 @@
+/* CSS Custom Properties for Theme System */
+
+/* Dark Theme (Default) */
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2a2a2a;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted: #999999;
+  --accent-color: #ff9500;
+  --error-color: #ff6b6b;
+  --border-color: #333333;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --display-bg: #1c191c;
+  --keypad-function: linear-gradient(to bottom, rgba(202, 202, 204, 1) 0%, rgba(196, 194, 204, 1) 100%);
+  --keypad-operator: linear-gradient(to bottom, rgb(216, 65, 95) 0%, rgb(209, 44, 77) 100%);
+  --keypad-digit: #e0e0e7;
+  --button-hover: rgba(255, 255, 255, 0.1);
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #e0e0e0;
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --text-muted: #666666;
+  --accent-color: #007aff;
+  --error-color: #ff3b30;
+  --border-color: #dddddd;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --display-bg: #f8f8f8;
+  --keypad-function: linear-gradient(to bottom, #e8e8e8 0%, #d0d0d0 100%);
+  --keypad-operator: linear-gradient(to bottom, #007aff 0%, #0056d6 100%);
+  --keypad-digit: #ffffff;
+  --button-hover: rgba(0, 0, 0, 0.1);
+}
+
+/* Apply theme variables */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.App {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+  transition: background 0.3s ease;
+}
+
+.calculator {
+  background: var(--bg-primary);
+  transition: background 0.3s ease;
+}
+
+.calculator-display {
+  background: var(--display-bg);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.calculator .function-keys {
+  background: var(--keypad-function);
+  transition: background 0.3s ease;
+}
+
+.calculator .operator-keys {
+  background: var(--keypad-operator);
+  transition: background 0.3s ease;
+}
+
+.calculator .digit-keys {
+  background: var(--keypad-digit);
+  transition: background 0.3s ease;
+}
+
+.history-panel {
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.history-header {
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.history-header h3 {
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.history-item {
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.history-item:hover {
+  background: var(--button-hover);
+}
+
+.calculation {
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.result {
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.no-history {
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.tooltip {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tooltip-top::after {
+  border-top-color: var(--bg-tertiary);
+}
+
+.tooltip-bottom::after {
+  border-bottom-color: var(--bg-tertiary);
+}
+
+.keyboard-shortcuts-panel {
+  background: var(--bg-tertiary);
+  transition: background-color 0.3s ease;
+}
+
+.shortcuts-header h3 {
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.shortcut-key {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  box-shadow: 0 2px 4px var(--shadow-color);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shortcut-desc {
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+/* Light theme specific adjustments */
+[data-theme="light"] .calculator {
+  box-shadow: 0px 0px 20px 0px var(--shadow-color);
+}
+
+[data-theme="light"] .calculator-key {
+  color: var(--text-primary);
+  border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .calculator .operator-keys .calculator-key {
+  color: white;
+}
+
+[data-theme="light"] .floating-history-btn,
+[data-theme="light"] .keyboard-shortcuts-btn {
+  background: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}

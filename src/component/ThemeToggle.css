@@ -1,0 +1,47 @@
+.theme-toggle-btn {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+  padding: 12px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  transform: scale(1.1);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+/* Light theme adjustments */
+[data-theme="light"] .theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  color: black;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .theme-toggle-btn {
+    top: 75px;
+    right: 15px;
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+}

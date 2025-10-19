@@ -12,7 +12,10 @@ const KeyboardShortcuts = () => {
     { key: "Escape", description: "Clear display" },
     { key: ".", description: "Decimal point" },
     { key: "%", description: "Percentage" },
-    { key: "H", description: "Toggle history" }
+    { key: "H", description: "Toggle history" },
+    { key: "S", description: "Switch calculator mode" },
+    { key: "C", description: "Clear display/all" },
+    { key: "T", description: "Toggle dark/light theme" }
   ];
 
   return (
