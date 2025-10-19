@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PointTarget from "react-point";
 import { Link } from "react-router-dom";
+import Tooltip from "./Tooltip";
 import "./ScientificKeypad.css";
 
 const ScientificKeypad = (props) => {
@@ -23,30 +24,38 @@ const ScientificKeypad = (props) => {
             >
               {deg ? "deg" : "rad"}
             </CalculatorKey>
-            <CalculatorKey
-              className="key-sin"
-              onPress={() => props.performOperation(sin)}
-            >
-              {inverse ? "sin⁻¹x" : "sin x"}
-            </CalculatorKey>
-            <CalculatorKey
-              className="key-cos"
-              onPress={() => props.performOperation(cos)}
-            >
-              {inverse ? "cos⁻¹x" : "cos x"}
-            </CalculatorKey>
-            <CalculatorKey
-              className="key-lg"
-              onPress={() => props.performOperation("lg")}
-            >
-              lg(x)
-            </CalculatorKey>
-            <CalculatorKey
-              className="key-ln"
-              onPress={() => props.performOperation("ln")}
-            >
-              ln(x)
-            </CalculatorKey>
+            <Tooltip text={inverse ? "Inverse sine (arcsine)" : "Sine function"}>
+              <CalculatorKey
+                className="key-sin"
+                onPress={() => props.performOperation(sin)}
+              >
+                {inverse ? "sin⁻¹x" : "sin x"}
+              </CalculatorKey>
+            </Tooltip>
+            <Tooltip text={inverse ? "Inverse cosine (arccosine)" : "Cosine function"}>
+              <CalculatorKey
+                className="key-cos"
+                onPress={() => props.performOperation(cos)}
+              >
+                {inverse ? "cos⁻¹x" : "cos x"}
+              </CalculatorKey>
+            </Tooltip>
+            <Tooltip text="Logarithm base 10">
+              <CalculatorKey
+                className="key-lg"
+                onPress={() => props.performOperation("lg")}
+              >
+                lg(x)
+              </CalculatorKey>
+            </Tooltip>
+            <Tooltip text="Natural logarithm (base e)">
+              <CalculatorKey
+                className="key-ln"
+                onPress={() => props.performOperation("ln")}
+              >
+                ln(x)
+              </CalculatorKey>
+            </Tooltip>
             <CalculatorKey
               className="key-ten-power"
               onPress={() => props.performOperation("10ˣ")}

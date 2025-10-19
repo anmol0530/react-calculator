@@ -9,6 +9,7 @@
   height: 540px;
   width: 320px;
   position: relative;
+  overflow: visible;
 }
 
 .wrapper .calculator {

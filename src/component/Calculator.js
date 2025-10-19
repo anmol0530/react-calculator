@@ -1,5 +1,8 @@
 import { Component } from "react";
 import Display from "./Display";
+import History from "./History";
+import FloatingHistoryButton from "./FloatingHistoryButton";
+import KeyboardShortcuts from "./KeyboardShortcuts";
 import { Switch, Route } from "react-router-dom";
 import Keypad from "./Keypad";
 import ScientificKeypad from "./ScientificKeypad";
@@ -11,6 +14,9 @@ export default class Calculator extends Component {
     operator: null,
     waitingForOperand: false,
     deg: true,
+    history: [],
+    showHistory: false,
+    currentExpression: "",
   };
 
   clearAll = () => {
@@ -19,6 +25,7 @@ export default class Calculator extends Component {
       displayValue: "0",
       operator: null,
       waitingForOperand: false,
+      currentExpression: "",
     });
   };
 
@@ -76,25 +83,79 @@ export default class Calculator extends Component {
   };
 
   inputDigit = (digit) => {
-    const { displayValue, waitingForOperand } = this.state;
+    const { displayValue, waitingForOperand, currentExpression } = this.state;
 
     if (waitingForOperand) {
       this.setState({
         displayValue: String(digit),
         waitingForOperand: false,
+        currentExpression: currentExpression + String(digit)
       });
     } else {
       this.setState({
         displayValue:
           displayValue === "0" ? String(digit) : displayValue + digit,
+        currentExpression: 
+          currentExpression === "" || currentExpression === "0" 
+            ? String(digit) 
+            : currentExpression + String(digit)
       });
     }
   };
 
-  factorial = (x) => {
-    if (x < 0) return;
-    if (x === 0) return 1;
-    return x * this.factorial(x - 1);
+  // History management methods
+  loadHistoryFromStorage = () => {
+    try {
+      const savedHistory = localStorage.getItem('calculator-history');
+      if (savedHistory) {
+        this.setState({ history: JSON.parse(savedHistory) });
+      }
+    } catch (error) {
+      console.error('Error loading history:', error);
+    }
+  };
+
+  saveHistoryToStorage = (history) => {
+    try {
+      localStorage.setItem('calculator-history', JSON.stringify(history));
+    } catch (error) {
+      console.error('Error saving history:', error);
+    }
+  };
+
+  addToHistory = (expression, result) => {
+    const newHistoryItem = {
+      expression,
+      result,
+      timestamp: new Date().toLocaleTimeString()
+    };
+
+    this.setState(prevState => {
+      const newHistory = [newHistoryItem, ...prevState.history].slice(0, 50); // Keep last 50 calculations
+      this.saveHistoryToStorage(newHistory);
+      return { history: newHistory };
+    });
+  };
+
+  clearHistory = () => {
+    this.setState({ history: [] });
+    localStorage.removeItem('calculator-history');
+  };
+
+  toggleHistory = () => {
+    this.setState(prevState => ({
+      showHistory: !prevState.showHistory
+    }));
+  };
+
+  selectFromHistory = (result) => {
+    this.setState({
+      displayValue: String(result),
+      value: result,
+      operator: null,
+      waitingForOperand: false,
+      currentExpression: String(result)
+    });
   };
 
   CalculatorOperations = {
@@ -140,24 +201,56 @@ export default class Calculator extends Component {
   };
 
   performOperation = (nextOperator) => {
-    const { value, displayValue, operator } = this.state;
+    const { value, displayValue, operator, currentExpression } = this.state;
     const inputValue = parseFloat(displayValue);
 
     if (value == null) {
       this.setState({
         value: inputValue,
+        currentExpression: currentExpression + this.getOperatorSymbol(nextOperator)
       });
     } else if (operator) {
       const currentValue = value || 0;
-      const newValue = this.CalculatorOperations[operator](
-        currentValue,
-        inputValue
-      );
+      let newValue;
+      try {
+        newValue = this.CalculatorOperations[operator](currentValue, inputValue);
+        
+        // Handle mathematical errors
+        if (isNaN(newValue) || !isFinite(newValue)) {
+          newValue = "Error";
+        }
+      } catch (error) {
+        newValue = "Error";
+      }
 
-      this.setState({
-        value: newValue,
-        displayValue: String(newValue),
-      });
+      // If this is equals operation, add to history
+      if (nextOperator === "=") {
+        const expression = currentExpression;
+        if (newValue !== "Error") {
+          this.addToHistory(expression, newValue);
+        }
+        this.setState({
+          value: newValue === "Error" ? null : newValue,
+          displayValue: String(newValue),
+          currentExpression: newValue === "Error" ? "" : String(newValue)
+        });
+      } else {
+        if (newValue === "Error") {
+          this.setState({
+            value: null,
+            displayValue: "Error",
+            currentExpression: "",
+            waitingForOperand: true,
+            operator: null
+          });
+          return;
+        }
+        this.setState({
+          value: newValue,
+          displayValue: String(newValue),
+          currentExpression: currentExpression + this.getOperatorSymbol(nextOperator)
+        });
+      }
     }
 
     this.setState({
@@ -166,11 +259,39 @@ export default class Calculator extends Component {
     });
   };
 
+  getOperatorSymbol = (operator) => {
+    const symbols = {
+      "+": " + ",
+      "-": " - ",
+      "*": " × ",
+      "/": " ÷ ",
+      "**": " ^ ",
+      "=": " = ",
+      "√": "√",
+      "sin": "sin(",
+      "cos": "cos(",
+      "tan": "tan(",
+      "sin⁻¹": "sin⁻¹(",
+      "cos⁻¹": "cos⁻¹(",
+      "tan⁻¹": "tan⁻¹(",
+      "lg": "lg(",
+      "ln": "ln(",
+      "10ˣ": "10^",
+      "eˣ": "e^",
+      "!": "!",
+      "1/x": "1/",
+      "π": "π",
+      "e": "e"
+    };
+    return symbols[operator] || ` ${operator} `;
+  };
+
   factorial = (n) => {
-    if (n === 0) return 1;
+    if (n < 0) return NaN;
+    if (n === 0 || n === 1) return 1;
     let f = 1;
-    for (let i = 1; i < n; i++) {
-      f = f * (i + 1);
+    for (let i = 2; i <= n; i++) {
+      f = f * i;
     }
     return f;
   };
@@ -203,11 +324,15 @@ export default class Calculator extends Component {
       } else {
         this.clearAll();
       }
+    } else if (key === "h" || key === "H") {
+      event.preventDefault();
+      this.toggleHistory();
     }
   };
 
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyDown);
+    this.loadHistoryFromStorage();
   }
 
   componentWillUnmount() {
@@ -215,7 +340,7 @@ export default class Calculator extends Component {
   }
 
   render() {
-    const { displayValue, deg } = this.state;
+    const { displayValue, deg, history, showHistory } = this.state;
     return (
       <div className="calculator">
         <Display value={displayValue} />
@@ -258,6 +383,18 @@ export default class Calculator extends Component {
             }}
           />
         </Switch>
+        <History
+          history={history}
+          isVisible={showHistory}
+          onSelectCalculation={this.selectFromHistory}
+          onClearHistory={this.clearHistory}
+          onToggleHistory={this.toggleHistory}
+        />
+        <FloatingHistoryButton 
+          onClick={this.toggleHistory}
+          showHistory={showHistory}
+        />
+        <KeyboardShortcuts />
       </div>
     );
   }
